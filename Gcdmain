@@ -1,0 +1,24 @@
+//name: Bryan Bonner
+//e-mail: bonnerbryan@gmail.com
+//course ID: CPSC223N
+//assignment: #1
+//due date: February 9, 2015
+//project title: Greatest Common Divisor
+//purpose: Learn how to make a UI while using the GCD algorithm and testing for invalids.
+//file name: Gcdmain
+//last modification: February 7, 2015
+
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+public class Gcdmain
+{
+    static void Main(string[] args)
+    {
+        System.Console.WriteLine("Welcome to the C# Greatest Common Divisor Program.");
+        Gcduserinterface Gcdapp = new Gcduserinterface();
+        Application.Run(Gcdapp);
+        System.Console.WriteLine("Main method will now shutdown.");
+    }
+}
