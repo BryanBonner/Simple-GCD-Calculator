@@ -1,0 +1,132 @@
+//name: Bryan Bonner
+//e-mail: bonnerbryan@gmail.com
+//course ID: CPSC223N
+//assignment: #1
+//due date: February 9, 2015
+//project title: Greatest Common Divisor
+//purpose: Learn how to make a UI while using the GCD algorithm and testing for invalids.
+//file name: Gcduserinterface
+//last modification: February 7, 2015
+
+public class Gcduserinterface : Form
+{
+    private Label title = new Label();
+    private Label author = new Label();
+    private Label sequencemessage = new Label();
+    private TextBox sequenceinputarea = new TextBox();
+    private Label sequencemessage2 = new Label();
+    private TextBox sequenceinputarea2 = new TextBox();
+    private Label outputinfo = new Label();
+    private Button computebutton = new Button();
+    private Button clearbutton = new Button();
+    private Button exitbutton = new Button();
+
+    public Gcduserinterface()
+    {   
+        //add colors
+        title.ForeColor = System.Drawing.Color.SteelBlue;
+        author.ForeColor = System.Drawing.Color.SlateBlue;
+ 
+        //Initialize text strings
+        Text = "Greatest Common Divisor";
+
+        title.Text = "Greatest Common Divisor";
+        author.Text = "by Bryan Bonner";
+
+        sequencemessage.Text = "Enter first integer: ";
+        sequenceinputarea.Text = ""; //Empty string
+
+        sequencemessage2.Text = "Enter second integer: ";
+        sequenceinputarea2.Text = ""; //Empty string
+
+        outputinfo.Text = "Result will display here.";
+        computebutton.Text = "Compute GCD";
+        clearbutton.Text = "Clear";
+        exitbutton.Text = "Exit";
+
+        //fonts and colors
+        title.Font = new Font("Arial", 14);
+        author.Font = new Font("Arial", 10);
+
+        //Set sizes
+        Size = new Size(500, 300);
+        title.Size = new Size(230, 20);
+        author.Size = new Size(200, 20);
+        sequencemessage.Size = new Size(100, 20);
+        sequenceinputarea.Size = new Size(80, 120);
+        sequencemessage2.Size = new Size(200, 20);
+        sequenceinputarea2.Size = new Size(80, 120);
+        outputinfo.Size = new Size(370, 30);
+        computebutton.Size = new Size(90, 30);
+        clearbutton.Size = new Size(90, 30);
+        exitbutton.Size = new Size(90, 30);
+
+        //Set locations
+        title.Location = new Point(140, 10);
+        author.Location = new Point(185, 30);
+        sequencemessage.Location = new Point(40, 60);
+        sequenceinputarea.Location = new Point(40, 80);
+        sequencemessage2.Location = new Point(245, 60);
+        sequenceinputarea2.Location = new Point(245, 80);
+        outputinfo.Location = new Point(50, 135);
+        computebutton.Location = new Point(60, 200);
+        clearbutton.Location = new Point(180, 200);
+        exitbutton.Location = new Point(300, 200);
+
+        //Associate the Compute button with the Enter key of the keyboard
+        AcceptButton = computebutton;
+
+        //Add controls to the form
+        Controls.Add(title);
+        Controls.Add(author);
+        Controls.Add(sequencemessage);
+        Controls.Add(sequenceinputarea);
+        Controls.Add(sequencemessage2);
+        Controls.Add(sequenceinputarea2);
+        Controls.Add(outputinfo);
+        Controls.Add(computebutton);
+        Controls.Add(clearbutton);
+        Controls.Add(exitbutton);
+
+        //Register the event handler.  In this case each button has an event handler, but no other 
+        //controls have event handlers.
+        computebutton.Click += new EventHandler(computegcd);
+        clearbutton.Click += new EventHandler(cleartext);
+        exitbutton.Click += new EventHandler(stoprun);  //The '+' is required.
+
+    }//End of constructor Gcduserinterface
+
+    //Method to execute when the compute button receives an event, namely: receives a mouse click
+    protected void computegcd(Object sender, EventArgs events)
+    {
+        long sequencenum = 0; //Initialize first long int to compute
+        long sequencenum2 = 0; //Initialize second long int to compute
+        string output = ""; //Empty string
+        try
+        {
+            sequencenum = Convert.ToInt64(sequenceinputarea.Text); 
+            sequencenum2 = Convert.ToInt64(sequenceinputarea2.Text);
+            if(sequencenum == 0 || sequencenum2 ==0 || sequencenum < 1 || sequencenum2 < 1)
+            {
+                output = "Input error. Try again.";
+                outputinfo.Text = output;
+            }
+            else
+            {
+                long gcdnum = Gcdlogic.compute(sequencenum, sequencenum2);
+                output = "GCD = " + gcdnum;
+                outputinfo.Text = output;   
+            }
+        }
+        catch(OverflowException)
+        {
+            output = "Input error. Try again.";
+            outputinfo.Text = output;
+        }
+        catch (FormatException)
+        {
+            output = "Input error. Try again.";
+            outputinfo.Text = output;
+        }
+    }
+
